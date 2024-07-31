@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "f779572f-d779-4edb-9b69-f465ca09b387",
+		"name": "HighLoadArchitect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23892015"
+	},
+	"item": [
+		{
+			"name": "/users/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Jack97\",\r\n    \"password\": \"g34sbv10u7\",\r\n    \"name\": \"Jack\",\r\n    \"surname\": \"Doule\",\r\n    \"gender\": \"male\",\r\n    \"dateOfBirth\":\"1997-12-12\",\r\n    \"interests\": \"crypto, boxing\",\r\n    \"city\": \"NY\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Jack97\",\r\n    \"password\": \"g34sbv10u7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/profile/id",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "a744323f-225e-4f94-94f5-1e5416ae1270",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/profile/58e0094c-5825-4d1a-afdd-45abce129155",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"58e0094c-5825-4d1a-afdd-45abce129155"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/profile/search",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5596ea20-ead9-440e-9b1e-bafb08d422bf",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/profile/search?name=вер&surname=сми",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "вер"
+						},
+						{
+							"key": "surname",
+							"value": "сми"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/test/insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/test/insert",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
