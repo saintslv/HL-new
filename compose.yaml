@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://db1:5432/user
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres 
+    networks:
+      pgnet:
+        ipv4_address: 172.25.0.2
+
+  db1:
+    image: postgres:16.3
+    container_name: db1
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5438:5432"
+    volumes:
+      - C:/Volumes/db-data/:/var/lib/postgresql/data
+    networks:
+      pgnet:
+        ipv4_address: 172.25.0.3
+    restart: unless-stopped
+
+  pgslave1:
+    image: postgres:16.3
+    container_name: pgslave1
+    environment:
+      POSTGRES_PASSWORD: pass
+    ports:
+      - "15432:5432"
+    volumes:
+      - C:/Volumes/pgslave/:/var/lib/postgresql/data
+    networks:
+      pgnet:
+        ipv4_address: 172.25.0.4
+    restart: unless-stopped
+    command: postgres
+    entrypoint: docker-entrypoint.sh
+
+  pgasyncslave1:
+    image: postgres:16.3
+    container_name: pgasyncslave1
+    environment:
+      POSTGRES_PASSWORD: pass
+    ports:
+      - "25432:5432"
+    volumes:
+      - C:/Volumes/pgasyncslave/:/var/lib/postgresql/data
+    networks:
+      pgnet:
+        ipv4_address: 172.25.0.5
+    restart: unless-stopped
+    command: postgres
+    entrypoint: docker-entrypoint.sh
+
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:ro
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    - /dev/disk/:/dev/disk:ro
+    networks:
+      pgnet:
+        ipv4_address: 172.25.0.6
+
+networks:
+  pgnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
