@@ -36,4 +36,10 @@ public class AuthService{
         UserToken userToken = new UserToken(token);
         return authRepository.findToken(userToken);
     }
+
+    @Transactional
+    public UUID findUserByToken(UUID token){
+        UserToken userToken = new UserToken(token);
+        return authRepository.findUserByToken(userToken);
+    }
 }

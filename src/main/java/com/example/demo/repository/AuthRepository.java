@@ -84,4 +84,24 @@ return null;
         }
         return false;
     }
+
+    @Transactional
+    public UUID findUserByToken(UserToken userToken) {
+        String sql = "SELECT user_id FROM access_token WHERE token = ? AND expiration_timestamp > ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setObject(1, userToken.getAccessToken());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getObject("user_id", UUID.class);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
