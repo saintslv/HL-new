@@ -133,6 +133,45 @@
 			"response": []
 		},
 		{
+			"name": "/posts/feed",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5596ea20-ead9-440e-9b1e-bafb08d422bf",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/posts/feed?offset=0&limit=10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost:8080/test/insert",
 			"request": {
 				"method": "POST",
